@@ -17,6 +17,7 @@ import 'screens/produtos_screen.dart';
 import 'screens/relatorios_screen.dart';
 import 'screens/estoque_screen.dart';
 import 'screens/home_screen.dart';
+import 'database/dummy_data.dart'; // Importação dos dados fictícios
 
 /// Ponto de entrada principal da aplicação Controle Restaurante.
 /// Inicializa o app Flutter com tema e rotas configuradas.
@@ -31,6 +32,9 @@ void main() async {
     sqfliteFfiInit();
     databaseFactory = databaseFactoryFfi;
   }
+
+  // Gera dados fictícios apenas se o banco estiver vazio
+  await DummyData.seedDatabase();
 
   runApp(const MyApp());
 }
