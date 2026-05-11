@@ -1,0 +1,136 @@
+﻿00:00 +0: loading E:/programacao_flutter/app_tutor/test/widget_test.dart
+00:00 +0: App initial screen loads
+ÔòÉÔòÉÔòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Ôò×ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+The following StateError was thrown running a test:
+Bad state: databaseFactory not initialized
+databaseFactory is only initialized when using sqflite. When using `sqflite_common_ffi`
+You must call `databaseFactory = databaseFactoryFfi;` before using global openDatabase API
+
+When the exception was thrown, this was the stack:
+#0      databaseFactory.<anonymous closure> (package:sqflite_common/src/sqflite_database_factory.dart:32:7)
+#1      databaseFactory (package:sqflite_common/src/sqflite_database_factory.dart:36:6)
+#2      getDatabasesPath (package:sqflite_common/sqflite.dart:109:38)
+#3      DatabaseHelper._initDB (package:app_tutor/database/database_helper.dart:22:26)
+#4      DatabaseHelper.database (package:app_tutor/database/database_helper.dart:17:23)
+#5      DatabaseHelper.getRelatorioDiario (package:app_tutor/database/database_helper.dart:249:22)
+#6      _HomeScreenState._carregarRelatorio (package:app_tutor/screens/home_screen.dart:25:32)
+#7      _HomeScreenState.initState (package:app_tutor/screens/home_screen.dart:19:5)
+#8      StatefulElement._firstBuild (package:flutter/src/widgets/framework.dart:5950:55)
+#9      ComponentElement.mount (package:flutter/src/widgets/framework.dart:5793:5)
+...     Normal element mounting (260 frames)
+#269    Element.inflateWidget (package:flutter/src/widgets/framework.dart:4587:20)
+#270    MultiChildRenderObjectElement.inflateWidget (package:flutter/src/widgets/framework.dart:7264:36)
+#271    MultiChildRenderObjectElement.mount (package:flutter/src/widgets/framework.dart:7279:32)
+...     Normal element mounting (473 frames)
+#744    Element.inflateWidget (package:flutter/src/widgets/framework.dart:4587:20)
+#745    Element.updateChild (package:flutter/src/widgets/framework.dart:4053:20)
+#746    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5841:16)
+#747    Element.rebuild (package:flutter/src/widgets/framework.dart:5529:7)
+#748    ProxyElement.update (package:flutter/src/widgets/framework.dart:6149:5)
+#749    _InheritedNotifierElement.update (package:flutter/src/widgets/inherited_notifier.dart:108:11)
+#750    Element.updateChild (package:flutter/src/widgets/framework.dart:4037:15)
+#751    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5841:16)
+#752    StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5982:11)
+#753    Element.rebuild (package:flutter/src/widgets/framework.dart:5529:7)
+#754    StatefulElement.update (package:flutter/src/widgets/framework.dart:6007:5)
+#755    Element.updateChild (package:flutter/src/widgets/framework.dart:4037:15)
+#756    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5841:16)
+#757    Element.rebuild (package:flutter/src/widgets/framework.dart:5529:7)
+#758    ProxyElement.update (package:flutter/src/widgets/framework.dart:6149:5)
+#759    _InheritedNotifierElement.update (package:flutter/src/widgets/inherited_notifier.dart:108:11)
+#760    Element.updateChild (package:flutter/src/widgets/framework.dart:4037:15)
+#761    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5841:16)
+#762    StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5982:11)
+#763    Element.rebuild (package:flutter/src/widgets/framework.dart:5529:7)
+#764    StatefulElement.update (package:flutter/src/widgets/framework.dart:6007:5)
+#765    Element.updateChild (package:flutter/src/widgets/framework.dart:4037:15)
+#766    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5841:16)
+#767    StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5982:11)
+#768    Element.rebuild (package:flutter/src/widgets/framework.dart:5529:7)
+#769    StatefulElement.update (package:flutter/src/widgets/framework.dart:6007:5)
+#770    Element.updateChild (package:flutter/src/widgets/framework.dart:4037:15)
+#771    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5841:16)
+#772    Element.rebuild (package:flutter/src/widgets/framework.dart:5529:7)
+#773    ProxyElement.update (package:flutter/src/widgets/framework.dart:6149:5)
+#774    Element.updateChild (package:flutter/src/widgets/framework.dart:4037:15)
+#775    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5841:16)
+#776    StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5982:11)
+#777    Element.rebuild (package:flutter/src/widgets/framework.dart:5529:7)
+#778    StatefulElement.update (package:flutter/src/widgets/framework.dart:6007:5)
+#779    Element.updateChild (package:flutter/src/widgets/framework.dart:4037:15)
+#780    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5841:16)
+#781    Element.rebuild (package:flutter/src/widgets/framework.dart:5529:7)
+#782    ProxyElement.update (package:flutter/src/widgets/framework.dart:6149:5)
+#783    Element.updateChild (package:flutter/src/widgets/framework.dart:4037:15)
+#784    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5841:16)
+#785    Element.rebuild (package:flutter/src/widgets/framework.dart:5529:7)
+#786    ProxyElement.update (package:flutter/src/widgets/framework.dart:6149:5)
+#787    Element.updateChild (package:flutter/src/widgets/framework.dart:4037:15)
+#788    _RawViewElement._updateChild (package:flutter/src/widgets/view.dart:481:16)
+#789    _RawViewElement.update (package:flutter/src/widgets/view.dart:568:5)
+#790    Element.updateChild (package:flutter/src/widgets/framework.dart:4037:15)
+#791    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5841:16)
+#792    Element.rebuild (package:flutter/src/widgets/framework.dart:5529:7)
+#793    StatelessElement.update (package:flutter/src/widgets/framework.dart:5895:5)
+#794    Element.updateChild (package:flutter/src/widgets/framework.dart:4037:15)
+#795    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5841:16)
+#796    StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5982:11)
+#797    Element.rebuild (package:flutter/src/widgets/framework.dart:5529:7)
+#798    StatefulElement.update (package:flutter/src/widgets/framework.dart:6007:5)
+#799    Element.updateChild (package:flutter/src/widgets/framework.dart:4037:15)
+#800    RootElement._rebuild (package:flutter/src/widgets/binding.dart:1822:16)
+#801    RootElement.update (package:flutter/src/widgets/binding.dart:1800:5)
+#802    RootElement.performRebuild (package:flutter/src/widgets/binding.dart:1814:7)
+#803    Element.rebuild (package:flutter/src/widgets/framework.dart:5529:7)
+#804    BuildScope._tryRebuild (package:flutter/src/widgets/framework.dart:2750:15)
+#805    BuildScope._flushDirtyElements (package:flutter/src/widgets/framework.dart:2807:11)
+#806    BuildOwner.buildScope (package:flutter/src/widgets/framework.dart:3111:18)
+#807    AutomatedTestWidgetsFlutterBinding.drawFrame (package:flutter_test/src/binding.dart:2131:19)
+#808    RendererBinding._handlePersistentFrameCallback (package:flutter/src/rendering/binding.dart:495:5)
+#809    SchedulerBinding._invokeFrameCallback (package:flutter/src/scheduler/binding.dart:1430:15)
+#810    SchedulerBinding.handleDrawFrame (package:flutter/src/scheduler/binding.dart:1345:9)
+#811    AutomatedTestWidgetsFlutterBinding.pump.<anonymous closure> (package:flutter_test/src/binding.dart:1960:9)
+#814    TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#815    AutomatedTestWidgetsFlutterBinding.pump (package:flutter_test/src/binding.dart:1949:27)
+#816    WidgetTester.pumpWidget.<anonymous closure> (package:flutter_test/src/widget_tester.dart:598:22)
+#819    TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#820    WidgetTester.pumpWidget (package:flutter_test/src/widget_tester.dart:595:27)
+#821    main.<anonymous closure> (file:///E:/programacao_flutter/app_tutor/test/widget_test.dart:16:18)
+#822    testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:29)
+<asynchronous suspension>
+#823    TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1682:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 5 frames from dart:async and package:stack_trace)
+
+The test description was:
+  App initial screen loads
+ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+00:00 +0 -1: App initial screen loads [E]
+  Test failed. See exception logs above.
+  The test description was: App initial screen loads
+  
+ÔòÉÔòÉÔòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Ôò×ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+The following TestFailure was thrown running a test (but after the test had completed):
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Registrar Venda": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#0      fail (package:matcher/src/expect/expect.dart:187:31)
+#1      _expect (package:matcher/src/expect/expect.dart:182:3)
+#2      expect (package:matcher/src/expect/expect.dart:65:3)
+#3      expect (package:flutter_test/src/widget_tester.dart:473:18)
+#4      main.<anonymous closure> (file:///E:/programacao_flutter/app_tutor/test/widget_test.dart:20:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1682:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+  Test failed. See exception logs above.
+  The test description was: App initial screen loads
+  
+00:00 +0 -1: Some tests failed.

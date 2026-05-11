@@ -1,0 +1,21 @@
+﻿00:00 +0: loading E:/programacao_flutter/app_tutor/test/widget_test.dart
+flutter : test/widget_test.dart:16:35: Error: Cannot invoke a non-'const' 
+constructor where a const expression is expected.
+No linha:1 caractere:1
++ flutter test test/widget_test.dart 2>&1 | Out-File -Encoding utf8 tes ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (test/widget_tes...on is expected. 
+   :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Try using a constructor or factory that is 'const'.
+    await tester.pumpWidget(const MyApp());
+                                  ^^^^^
+00:00 +0 -1: loading E:/programacao_flutter/app_tutor/test/widget_test.dart [E]
+  Failed to load "E:/programacao_flutter/app_tutor/test/widget_test.dart":
+  Compilation failed for testPath=E:/programacao_flutter/app_tutor/test/widget_test.dart: test/widget_test.dart:16:35: Error: Cannot invoke a non-'const' constructor where a const expression is expected.
+  Try using a constructor or factory that is 'const'.
+      await tester.pumpWidget(const MyApp());
+                                    ^^^^^
+  .
+00:00 +0 -1: Some tests failed.

@@ -1,0 +1,286 @@
+﻿Analyzing 2 items...                                            
+
+   info - Parameter 'key' could be a super parameter - lib\screens\funcionarios_screen.dart:7:9 - use_super_parameters
+   info - Invalid use of a private type in a public API - lib\screens\funcionarios_screen.dart:10:3 - library_private_types_in_public_api
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:100:19 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:109:16 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:114:19 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:120:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:120:27 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:125:28 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:131:39 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:143:23 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:162:28 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:184:25 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:184:39 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:190:39 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:194:42 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:209:46 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:225:45 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:250:16 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:266:16 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:270:11 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:273:20 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:275:31 - prefer_const_constructors
+   info - Constructors in '@immutable' classes should be declared as 'const' - lib\screens\funcionarios_screen.dart:292:3 - prefer_const_constructors_in_immutables
+   info - Use a 'SizedBox' to add whitespace to a layout - lib\screens\funcionarios_screen.dart:323:16 - sized_box_for_whitespace
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:333:31 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:335:29 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:339:17 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:341:31 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:343:29 - prefer_const_constructors
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\screens\funcionarios_screen.dart:345:19 - deprecated_member_use
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:354:17 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:357:31 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:359:29 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:363:17 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:366:31 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:368:29 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:371:33 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:378:17 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:380:28 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:381:26 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:401:18 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\funcionarios_screen.dart:418:18 - prefer_const_constructors
+   info - Parameter 'key' could be a super parameter - lib\screens\home_screen.dart:5:9 - use_super_parameters
+   info - Invalid use of a private type in a public API - lib\screens\home_screen.dart:14:3 - library_private_types_in_public_api
+   info - The private field _dataHoje could be 'final' - lib\screens\home_screen.dart:20:10 - prefer_final_fields
+   info - Use 'const' with the constructor to improve performance - lib\screens\home_screen.dart:56:16 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\home_screen.dart:61:19 - prefer_const_constructors
+   info - Unnecessary braces in a string interpolation - lib\screens\home_screen.dart:74:36 - unnecessary_brace_in_string_interps
+   info - Use 'const' with the constructor to improve performance - lib\screens\home_screen.dart:75:28 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\home_screen.dart:77:19 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\home_screen.dart:82:32 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\home_screen.dart:83:30 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\home_screen.dart:90:32 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\home_screen.dart:91:30 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\home_screen.dart:99:30 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\home_screen.dart:106:32 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\home_screen.dart:107:30 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\home_screen.dart:112:19 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\home_screen.dart:117:32 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\home_screen.dart:124:27 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\home_screen.dart:125:27 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\home_screen.dart:129:38 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\home_screen.dart:136:19 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\home_screen.dart:143:27 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\home_screen.dart:144:28 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\home_screen.dart:148:36 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\home_screen.dart:152:19 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\home_screen.dart:158:27 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\home_screen.dart:159:28 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\home_screen.dart:163:36 - prefer_const_constructors
+   info - Parameter 'key' could be a super parameter - lib\screens\registrar_producao_screen.dart:9:9 - use_super_parameters
+   info - Invalid use of a private type in a public API - lib\screens\registrar_producao_screen.dart:12:3 - library_private_types_in_public_api
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:127:16 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:133:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:134:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:137:22 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:139:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:142:22 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:146:26 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:149:26 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:160:20 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:184:19 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:219:16 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:224:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:224:27 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:226:24 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:235:34 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:236:32 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:239:33 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:253:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:257:35 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:259:33 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:260:37 - prefer_const_constructors
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\screens\registrar_producao_screen.dart:262:23 - deprecated_member_use
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:275:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:282:36 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:295:36 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:309:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:314:35 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:316:33 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:317:37 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:330:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:335:35 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:337:33 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:338:37 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:346:23 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:348:34 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:356:29 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:357:29 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:364:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:369:35 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:371:33 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:372:37 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:374:37 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:382:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:386:35 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:388:33 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:389:37 - prefer_const_constructors
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\screens\registrar_producao_screen.dart:391:23 - deprecated_member_use
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:404:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:410:37 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:412:35 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:413:39 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:418:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:426:35 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:427:36 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:430:25 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:434:35 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_producao_screen.dart:435:36 - prefer_const_constructors
+   info - Parameter 'key' could be a super parameter - lib\screens\registrar_venda_screen.dart:9:9 - use_super_parameters
+   info - Invalid use of a private type in a public API - lib\screens\registrar_venda_screen.dart:12:3 - library_private_types_in_public_api
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:119:16 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\screens\registrar_venda_screen.dart:120:21 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:121:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:122:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:123:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:131:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:132:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:134:22 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:141:20 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:150:20 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:162:19 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:171:16 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:176:19 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:184:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:184:27 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:186:24 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:195:34 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:199:40 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:200:38 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:203:39 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:207:29 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:209:40 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:210:38 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:213:39 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:222:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:226:35 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:228:33 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:229:37 - prefer_const_constructors
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\screens\registrar_venda_screen.dart:231:23 - deprecated_member_use
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:244:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:249:35 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:251:33 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:252:37 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:264:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:271:36 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:275:31 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:277:40 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:281:40 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:288:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:292:30 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:301:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:305:35 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:307:33 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:308:37 - prefer_const_constructors
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\screens\registrar_venda_screen.dart:310:23 - deprecated_member_use
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:317:31 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:328:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:332:35 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:334:33 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:335:37 - prefer_const_constructors
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\screens\registrar_venda_screen.dart:337:23 - deprecated_member_use
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:350:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:355:35 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:357:33 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:358:37 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:363:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:371:35 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:372:36 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:374:40 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:378:25 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:382:35 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:383:36 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:387:40 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:439:16 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:443:23 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:454:20 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\registrar_venda_screen.dart:458:20 - prefer_const_constructors
+   info - Parameter 'key' could be a super parameter - lib\screens\relatorios_screen.dart:8:9 - use_super_parameters
+   info - Invalid use of a private type in a public API - lib\screens\relatorios_screen.dart:11:3 - library_private_types_in_public_api
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:17:50 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:86:16 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:91:19 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:100:15 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:100:53 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:101:15 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:101:54 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:102:15 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:102:53 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:108:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:108:27 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:110:17 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:111:26 - prefer_const_constructors
+   info - Use 'const' literals as arguments to constructors of '@immutable' classes - lib\screens\relatorios_screen.dart:113:31 - prefer_const_literals_to_create_immutables
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:114:23 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:115:23 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:116:23 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:118:32 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:124:28 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:129:23 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:131:32 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:133:23 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:138:23 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:141:23 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:144:23 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:146:32 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:148:23 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:151:23 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:154:23 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:156:32 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:158:23 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:161:23 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:164:23 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:166:32 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:168:23 - prefer_const_constructors
+   info - Unnecessary use of 'toList' in a spread - lib\screens\relatorios_screen.dart:169:89 - unnecessary_to_list_in_spreads
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:179:16 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:217:18 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:222:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:228:13 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:243:16 - prefer_const_constructors
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\relatorios_screen.dart:249:32 - deprecated_member_use
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:257:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:266:30 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:269:26 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:292:24 - prefer_const_constructors
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\relatorios_screen.dart:295:37 - deprecated_member_use
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:307:16 - prefer_const_constructors
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\screens\relatorios_screen.dart:313:32 - deprecated_member_use
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:321:21 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:330:30 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:333:26 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:369:15 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:373:18 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:377:18 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:382:22 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:393:17 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:397:19 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:399:28 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:401:19 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:403:30 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:406:25 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:407:25 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:408:61 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:416:19 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:417:19 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:419:28 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:421:19 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:423:30 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:426:25 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:427:25 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:428:58 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:434:17 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:445:16 - prefer_const_constructors
+   info - Use 'const' with the constructor to improve performance - lib\screens\relatorios_screen.dart:450:30 - prefer_const_constructors
+
+flutter : 275 issues found. (ran in 1.7s)
+No linha:1 caractere:1
++ flutter analyze lib/screens test 2>&1 | Out-File -Encoding utf8 analy ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (275 issues found. (ran in 1.7s):S 
+   tring) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 

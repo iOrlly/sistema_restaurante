@@ -1,0 +1,3 @@
+﻿00:00 +0: loading E:/programacao_flutter/app_tutor/test/widget_test.dart
+00:00 +0: App initial screen loads
+00:00 +1: All tests passed!
