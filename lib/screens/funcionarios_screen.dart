@@ -127,6 +127,53 @@ class _FuncionariosScreenState extends State<FuncionariosScreen> {
     }
   }
 
+  Future<void> _registrarPagamentoSalario(Funcionario f) async {
+    final TextEditingController valorController = TextEditingController(
+      text: f.salario.toStringAsFixed(2).replaceAll('.', ',')
+    );
+    final mesReferencia = DateFormat('MMMM / yyyy', 'pt_BR').format(DateTime.now());
+
+    final bool? confirmar = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: const Color(0xFF1E1E1E),
+        title: Text('Pagar Salário: ${f.nome}'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text('Referente a $mesReferencia', style: const TextStyle(color: Colors.grey)),
+            const SizedBox(height: 16),
+            TextField(
+              controller: valorController,
+              keyboardType: TextInputType.number,
+              style: const TextStyle(color: Colors.white),
+              decoration: const InputDecoration(labelText: 'Valor do Pagamento (R\$)'),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Cancelar')),
+          ElevatedButton(onPressed: () => Navigator.pop(context, true), child: const Text('Confirmar Pagamento')),
+        ],
+      ),
+    );
+
+    if (confirmar == true) {
+      await _dbHelper.registrarPagamento(
+        funcionarioId: f.id,
+        tipo: 'mensalista',
+        valor: double.tryParse(valorController.text.replaceAll(',', '.')) ?? f.salario,
+        referenciaMes: DateFormat('yyyy-MM').format(DateTime.now()),
+        observacao: 'Salário fixo mensal',
+      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Salário registrado e enviado ao financeiro! 💰'), backgroundColor: Colors.green),
+        );
+      }
+    }
+  }
+
   void _abrirCentralSolicitacoes() {
     showModalBottomSheet(
       context: context,
@@ -300,6 +347,11 @@ class _FuncionariosScreenState extends State<FuncionariosScreen> {
                   icon: const Icon(Icons.event_note, color: Color(0xFFFFB300)),
                   tooltip: 'Agendar Folga',
                   onPressed: () => _agendarFolga(f),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.payments, color: Colors.green),
+                  tooltip: 'Registrar Pagamento de Salário',
+                  onPressed: () => _registrarPagamentoSalario(f),
                 ),
                 IconButton(
                   icon: const Icon(Icons.edit, size: 20, color: Colors.white70),

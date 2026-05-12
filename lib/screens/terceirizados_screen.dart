@@ -72,26 +72,34 @@ class _TerceirizadosScreenState extends State<TerceirizadosScreen> {
     );
 
     if (confirmar == true) {
+      // REGISTRAR NO HISTÓRICO ANTES DE ZERAR
+      await _dbHelper.registrarPagamento(
+        terceirizadoId: t.id,
+        tipo: 'terceirizado',
+        valor: t.totalDevido,
+        observacao: 'Pagamento de ${t.diasTrabalhados} diárias',
+      );
+
       t.diasTrabalhados = 0;
       await _dbHelper.updateTerceirizado(t);
       _carregarTerceirizados();
+      
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Pagamento registrado no histórico! ✅'), backgroundColor: Colors.green),
+        );
+      }
     }
   }
 
-  Future<void> _salvarTerceirizado(Terceirizado? original) async {
-    final result = await showDialog<Terceirizado>(
+  void _abrirHistorico() {
+    showModalBottomSheet(
       context: context,
-      builder: (context) => _TerceirizadoFormDialog(terceirizado: original),
+      isScrollControlled: true,
+      backgroundColor: const Color(0xFF1E1E1E),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (context) => _HistoricoPagamentos(tipo: 'terceirizado'),
     );
-
-    if (result != null) {
-      if (original == null) {
-        await _dbHelper.insertTerceirizado(result);
-      } else {
-        await _dbHelper.updateTerceirizado(result);
-      }
-      _carregarTerceirizados();
-    }
   }
 
   @override
@@ -103,6 +111,11 @@ class _TerceirizadosScreenState extends State<TerceirizadosScreen> {
         backgroundColor: Colors.black,
         foregroundColor: const Color(0xFFD32F2F),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.history, color: Color(0xFFFFB300)),
+            tooltip: 'Histórico de Pagamentos',
+            onPressed: _abrirHistorico,
+          ),
           IconButton(
             icon: const Icon(Icons.person_add, color: Color(0xFFFFB300)),
             onPressed: () => _salvarTerceirizado(null),
@@ -213,6 +226,75 @@ class _TerceirizadosScreenState extends State<TerceirizadosScreen> {
                     );
                   },
                 ),
+    );
+  }
+}
+
+class _HistoricoPagamentos extends StatefulWidget {
+  final String tipo;
+  const _HistoricoPagamentos({required this.tipo});
+
+  @override
+  State<_HistoricoPagamentos> createState() => _HistoricoPagamentosState();
+}
+
+class _HistoricoPagamentosState extends State<_HistoricoPagamentos> {
+  List<Map<String, dynamic>> _pagamentos = [];
+  bool _loading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _carregar();
+  }
+
+  Future<void> _carregar() async {
+    final res = await DatabaseHelper.instance.getHistoricoPagamentos(tipo: widget.tipo);
+    setState(() {
+      _pagamentos = res;
+      _loading = false;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.7,
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('HISTÓRICO: ${widget.tipo.toUpperCase()}', style: const TextStyle(color: Color(0xFFFFB300), fontWeight: FontWeight.bold, fontSize: 18)),
+              IconButton(icon: const Icon(Icons.close, color: Colors.grey), onPressed: () => Navigator.pop(context)),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Expanded(
+            child: _loading 
+              ? const Center(child: CircularProgressIndicator())
+              : _pagamentos.isEmpty 
+                ? const Center(child: Text('Nenhum registro encontrado', style: TextStyle(color: Colors.grey)))
+                : ListView.builder(
+                    itemCount: _pagamentos.length,
+                    itemBuilder: (context, index) {
+                      final p = _pagamentos[index];
+                      final data = DateTime.parse(p['data_pagamento']);
+                      return Card(
+                        color: Colors.black,
+                        child: ListTile(
+                          title: Text('R\$ ${p['valor'].toStringAsFixed(2)}', style: const TextStyle(color: Color(0xFFFFB300), fontWeight: FontWeight.bold)),
+                          subtitle: Text('${p['observacao'] ?? ''}\n${DateFormat('dd/MM/yyyy HH:mm').format(data)}', style: const TextStyle(fontSize: 12)),
+                          trailing: const Icon(Icons.verified, color: Colors.green, size: 16),
+                        ),
+                      );
+                    },
+                  ),
+          ),
+        ],
+      ),
     );
   }
 }

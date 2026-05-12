@@ -30,10 +30,11 @@ O **Controle Restaurante** é uma solução completa em Flutter desenvolvida par
 
 ---
 
-## 👥 Gestão de Pessoas
-- **Equipe Fixa:** Controle de férias, faltas e geração automática de folha de pagamento em Excel.
-- **Terceirizados:** Gestão de diárias com histórico de pagamentos e integração direta com WhatsApp para convocação.
-- **Central de Solicitações:** Sistema de aprovação de folgas e visualização de alertas de estoque.
+### 👥 Gestão de Pessoas & Pagamentos (Atualizado!)
+- **Equipe Fixa:** Controle de férias, faltas e novo botão de **"Registrar Pagamento de Salário"**.
+- **Terceirizados:** Ao clicar em "Quitar/Zerar", o sistema agora gera um registro histórico permanente do pagamento.
+- **Integração Financeira:** Todos os pagamentos (salários e diárias) são enviados automaticamente para a tela de Fechamento de Caixa.
+- **Histórico:** Mantenha o registro de tudo o que foi pago para cada colaborador com data e hora.
 
 ---
 
@@ -45,7 +46,10 @@ O **Controle Restaurante** é uma solução completa em Flutter desenvolvida par
 **2. Como a regra de boletos de segunda-feira funciona?**
 > Para facilitar a gestão bancária, o app soma todos os boletos que vencem no Sábado, Domingo e Segunda-feira em um único bloco de "Total Hoje" quando visualizado na segunda, refletindo o impacto real no seu caixa no primeiro dia útil.
 
-**3. Posso levar meus dados para o computador?**
+**3. Onde vejo o que já paguei para os funcionários?**
+> Na tela de **Terceirizados**, existe um novo ícone de **Relógio (Histórico)** no topo. Lá você vê a lista de todos os acertos realizados. Para os mensalistas, os valores aparecem consolidados no **Fechamento de Caixa** dentro do período filtrado.
+
+**4. Posso levar meus dados para o computador?**
 > Com certeza. O app possui integração com **Microsoft Excel**. Você pode exportar boletos, folhas de pagamento e relatórios de faturamento com um clique.
 
 ---

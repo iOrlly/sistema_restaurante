@@ -32,7 +32,7 @@ class DatabaseHelper {
     try {
       final database = await openDatabase(
         path,
-        version: 12, // Versão 12 para Data de Pagamento em Boletos
+        version: 13, // Versão 13 para Histórico de Pagamentos (Terceirizados e Mensalistas)
         onCreate: _createTables,
         onUpgrade: _upgradeTables,
       );
@@ -275,6 +275,20 @@ class DatabaseHelper {
     }
     if (oldVersion < 12) {
       await db.execute('ALTER TABLE boletos ADD COLUMN data_pagamento TEXT');
+    }
+    if (oldVersion < 13) {
+      await db.execute('''
+        CREATE TABLE pagamentos_historico(
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          funcionario_id INTEGER,
+          terceirizado_id INTEGER,
+          tipo TEXT NOT NULL, -- 'mensalista' ou 'terceirizado'
+          valor REAL NOT NULL,
+          data_pagamento TEXT NOT NULL,
+          referencia_mes TEXT, -- Para mensalistas (Ex: 2024-05)
+          observacao TEXT
+        )
+      ''');
     }
   }
 
@@ -643,6 +657,46 @@ class DatabaseHelper {
     return res;
   }
 
+  // --- PAGAMENTOS ---
+  Future<int> registrarPagamento({
+    int? funcionarioId,
+    int? terceirizadoId,
+    required String tipo,
+    required double valor,
+    String? referenciaMes,
+    String? observacao,
+  }) async {
+    final db = await database;
+    return await db.insert('pagamentos_historico', {
+      'funcionario_id': funcionarioId,
+      'terceirizado_id': terceirizadoId,
+      'tipo': tipo,
+      'valor': valor,
+      'data_pagamento': DateTime.now().toIso8601String(),
+      'referencia_mes': referenciaMes,
+      'observacao': observacao,
+    });
+  }
+
+  Future<List<Map<String, dynamic>>> getHistoricoPagamentos({String? tipo, DateTime? inicio, DateTime? fim}) async {
+    final db = await database;
+    String where = "1=1";
+    List<dynamic> args = [];
+    
+    if (tipo != null) {
+      where += " AND tipo = ?";
+      args.add(tipo);
+    }
+    
+    if (inicio != null && fim != null) {
+      where += " AND data_pagamento BETWEEN ? AND ?";
+      args.add(inicio.toIso8601String());
+      args.add(fim.add(const Duration(days: 1)).toIso8601String());
+    }
+
+    return await db.query('pagamentos_historico', where: where, whereArgs: args, orderBy: 'data_pagamento DESC');
+  }
+
   // MÉTODO DE INTEGRAÇÃO TOTAL PARA O FECHAMENTO
   Future<Map<String, double>> getSugestaoFechamento(DateTime data) async {
     final db = await database;
@@ -729,6 +783,17 @@ class DatabaseHelper {
       for (var di in resD) {
         totalDiarias += (di['valor'] as num).toDouble();
         listaDiarias.add(di);
+      }
+
+      // 4. Salários de Mensalistas pagos no período
+      final resM = await db.rawQuery('''
+        SELECT valor, data_pagamento, referencia_mes 
+        FROM pagamentos_historico 
+        WHERE tipo = 'mensalista' AND data_pagamento LIKE ?
+      ''', ['$dataStr%']);
+      
+      for (var m in resM) {
+        totalDiarias += (m['valor'] as num).toDouble(); // Soma ao custo de pessoal
       }
     }
 
