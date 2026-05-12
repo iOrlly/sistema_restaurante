@@ -11,6 +11,7 @@ import '../models/terceirizado.dart';
 import '../models/notificacao_folga.dart';
 import '../models/estoque_item.dart';
 import '../models/notificacao_geral.dart';
+import '../models/boleto.dart';
 
 class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._init();
@@ -31,7 +32,7 @@ class DatabaseHelper {
     try {
       final database = await openDatabase(
         path,
-        version: 10, // Versão 10 para Estoque e Notificações Gerais
+        version: 11, // Versão 11 para Módulo de Boletos
         onCreate: _createTables,
         onUpgrade: _upgradeTables,
       );
@@ -201,6 +202,17 @@ class DatabaseHelper {
         referencia_id INTEGER
       )
     ''');
+
+    await db.execute('''
+      CREATE TABLE boletos(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        descricao TEXT NOT NULL,
+        valor REAL NOT NULL,
+        data_vencimento TEXT NOT NULL,
+        status INTEGER NOT NULL DEFAULT 0,
+        categoria TEXT NOT NULL
+      )
+    ''');
   }
 
   Future<void> _upgradeTables(Database db, int oldVersion, int newVersion) async {
@@ -247,6 +259,18 @@ class DatabaseHelper {
     if (oldVersion < 10) {
       await db.execute('CREATE TABLE estoque(id INTEGER PRIMARY KEY AUTOINCREMENT, nome_item TEXT NOT NULL, categoria TEXT NOT NULL, quantidade_atual REAL NOT NULL, quantidade_minima REAL NOT NULL, data_validade TEXT, custo_unitario REAL NOT NULL, unidade_medida TEXT NOT NULL, fator_conversao REAL NOT NULL DEFAULT 1.0)');
       await db.execute('CREATE TABLE notificacoes_gerais(id INTEGER PRIMARY KEY AUTOINCREMENT, tipo TEXT NOT NULL, titulo TEXT NOT NULL, mensagem TEXT NOT NULL, data_criacao TEXT NOT NULL, status TEXT NOT NULL DEFAULT "pendente", referencia_id INTEGER)');
+    }
+    if (oldVersion < 11) {
+      await db.execute('''
+        CREATE TABLE boletos(
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          descricao TEXT NOT NULL,
+          valor REAL NOT NULL,
+          data_vencimento TEXT NOT NULL,
+          status INTEGER NOT NULL DEFAULT 0,
+          categoria TEXT NOT NULL
+        )
+      ''');
     }
   }
 
@@ -444,6 +468,68 @@ class DatabaseHelper {
   Future<int> deleteTerceirizado(int id) async {
     final db = await database;
     return await db.delete('terceirizados', where: 'id = ?', whereArgs: [id]);
+  }
+
+  // --- BOLETOS ---
+  Future<int> insertBoleto(Boleto b) async {
+    final db = await database;
+    return await db.insert('boletos', b.toMap());
+  }
+
+  Future<List<Boleto>> getAllBoletos() async {
+    final db = await database;
+    final res = await db.query('boletos', orderBy: 'data_vencimento ASC');
+    return res.map((j) => Boleto.fromMap(j)).toList();
+  }
+
+  Future<int> updateBoleto(Boleto b) async {
+    final db = await database;
+    return await db.update('boletos', b.toMap(), where: 'id = ?', whereArgs: [b.id]);
+  }
+
+  Future<int> deleteBoleto(int id) async {
+    final db = await database;
+    return await db.delete('boletos', where: 'id = ?', whereArgs: [id]);
+  }
+
+  Future<double> getTotalPendenteHoje() async {
+    final db = await database;
+    final now = DateTime.now();
+    final todayStr = DateFormat('yyyy-MM-dd').format(now);
+    
+    // Se for segunda-feira, somar sábado, domingo e hoje
+    if (now.weekday == DateTime.monday) {
+      final sat = DateFormat('yyyy-MM-dd').format(now.subtract(const Duration(days: 2)));
+      final sun = DateFormat('yyyy-MM-dd').format(now.subtract(const Duration(days: 1)));
+      final res = await db.rawQuery(
+        "SELECT SUM(valor) as total FROM boletos WHERE status = 0 AND (data_vencimento LIKE ? OR data_vencimento LIKE ? OR data_vencimento LIKE ?)",
+        ['$sat%', '$sun%', '$todayStr%']
+      );
+      return Sqflite.firstIntValue(res)?.toDouble() ?? (res.first['total'] as num?)?.toDouble() ?? 0.0;
+    } else {
+      final res = await db.rawQuery(
+        "SELECT SUM(valor) as total FROM boletos WHERE status = 0 AND data_vencimento LIKE ?",
+        ['$todayStr%']
+      );
+      return (res.first['total'] as num?)?.toDouble() ?? 0.0;
+    }
+  }
+
+  Future<double> getTotalSemanal() async {
+    final db = await database;
+    final now = DateTime.now();
+    // Encontrar a segunda-feira da semana atual
+    final monday = now.subtract(Duration(days: now.weekday - 1));
+    final sunday = monday.add(const Duration(days: 6));
+    
+    final start = DateFormat('yyyy-MM-dd').format(monday);
+    final end = DateFormat('yyyy-MM-dd').format(sunday);
+    
+    final res = await db.rawQuery(
+      "SELECT SUM(valor) as total FROM boletos WHERE data_vencimento BETWEEN ? AND ?",
+      ['$start 00:00:00', '$end 23:59:59']
+    );
+    return (res.first['total'] as num?)?.toDouble() ?? 0.0;
   }
 
   // Relatórios e Lógica de Negócio

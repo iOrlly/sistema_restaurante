@@ -4,7 +4,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../database/database_helper.dart';
 import '../models/funcionario.dart';
 import '../models/notificacao_folga.dart';
-import '../services/excel_service.dart';
 
 class FuncionariosScreen extends StatefulWidget {
   const FuncionariosScreen({super.key});
@@ -285,7 +284,7 @@ class _FuncionariosScreenState extends State<FuncionariosScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(f.nome, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white)),
-                      Text('${f.cargo.displayName}${f.cargo2 != null ? ' / ' + f.cargo2!.displayName : ''}', 
+                      Text('${f.cargo.displayName}${f.cargo2 != null ? ' / ${f.cargo2!.displayName}' : ''}', 
                           style: const TextStyle(fontSize: 12, color: Colors.grey)),
                     ],
                   ),
@@ -364,8 +363,11 @@ class _FuncionariosScreenState extends State<FuncionariosScreen> {
       builder: (context) => _FuncionarioDialog(funcionario: f),
     );
     if (result != null) {
-      if (f == null) await _dbHelper.insertFuncionario(result);
-      else await _dbHelper.updateFuncionario(result);
+      if (f == null) {
+        await _dbHelper.insertFuncionario(result);
+      } else {
+        await _dbHelper.updateFuncionario(result);
+      }
       _carregarDados();
     }
   }
@@ -484,7 +486,7 @@ class _FuncionarioDialogState extends State<_FuncionarioDialog> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: DropdownButtonFormField<T>(
-        value: value,
+        initialValue: value,
         dropdownColor: const Color(0xFF1E1E1E),
         decoration: InputDecoration(
           labelText: label,

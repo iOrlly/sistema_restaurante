@@ -79,4 +79,33 @@ class ExcelService {
 
     await SaveHelper.saveEAbrir(excel, 'Relatorio_${titulo}_${DateFormat('dd_MM_yyyy').format(DateTime.now())}.xlsx');
   }
+
+  static Future<void> exportarBoletos(List<dynamic> boletos) async {
+    var excel = Excel.createExcel();
+    Sheet sheetObject = excel['Boletos'];
+    excel.delete('Sheet1');
+
+    CellStyle headerStyle = CellStyle(
+      bold: true,
+      backgroundColorHex: ExcelColor.fromHexString('#CCCCCC'),
+    );
+
+    List<String> headers = ['Data Vencimento', 'Descrição', 'Valor', 'Categoria', 'Status'];
+    for (var i = 0; i < headers.length; i++) {
+      var cell = sheetObject.cell(CellIndex.indexByColumnRow(columnIndex: i, rowIndex: 0));
+      cell.value = TextCellValue(headers[i]);
+      cell.cellStyle = headerStyle;
+    }
+
+    for (var i = 0; i < boletos.length; i++) {
+      var b = boletos[i];
+      sheetObject.cell(CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: i + 1)).value = TextCellValue(DateFormat('dd/MM/yyyy').format(b.dataVencimento));
+      sheetObject.cell(CellIndex.indexByColumnRow(columnIndex: 1, rowIndex: i + 1)).value = TextCellValue(b.descricao);
+      sheetObject.cell(CellIndex.indexByColumnRow(columnIndex: 2, rowIndex: i + 1)).value = DoubleCellValue(b.valor);
+      sheetObject.cell(CellIndex.indexByColumnRow(columnIndex: 3, rowIndex: i + 1)).value = TextCellValue(b.categoria);
+      sheetObject.cell(CellIndex.indexByColumnRow(columnIndex: 4, rowIndex: i + 1)).value = TextCellValue(b.status == 1 ? 'Pago' : 'Pendente');
+    }
+
+    await SaveHelper.saveEAbrir(excel, 'relatorio_boletos_${DateFormat('yyyy-MM-dd').format(DateTime.now())}.xlsx');
+  }
 }

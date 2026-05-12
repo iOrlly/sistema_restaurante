@@ -159,7 +159,7 @@ class ResultadoDiario {
     List<String> novosAlertas = [];
     
     if (!metaVendasAtingida) {
-      novosAlertas.add('📉 Meta de vendas não atingida (' + r'R$ ' + '${(metaVendasDiaria - totalVendasLiquido).toStringAsFixed(2)} abaixo)');
+      novosAlertas.add('📉 Meta de vendas não atingida (' r'R$ ' '${(metaVendasDiaria - totalVendasLiquido).toStringAsFixed(2)} abaixo)');
     }
     
     if (!metaDesperdicioAtingida) {
@@ -171,7 +171,7 @@ class ResultadoDiario {
     }
     
     if (totalClientesAtendidos < 50 && totalVendasLiquido > 0) {
-      novosAlertas.add('📊 Ticket médio alto (' + r'R$ ' + '${ticketMedio.toStringAsFixed(2)}), mas poucos clientes');
+      novosAlertas.add('📊 Ticket médio alto (' r'R$ ' '${ticketMedio.toStringAsFixed(2)}), mas poucos clientes');
     }
     
     // Produto com maior desperdício
@@ -248,20 +248,20 @@ class ResultadoDiario {
     sb.writeln('═══════════════════════════════════════');
     sb.writeln('');
     sb.writeln('💰 FINANCEIRO');
-    sb.writeln('   Vendas Brutas: ' + r'R$ ' + totalVendasBruto.toStringAsFixed(2));
-    sb.writeln('   Descontos: ' + r'R$ ' + totalDescontos.toStringAsFixed(2));
-    sb.writeln('   Vendas Líquidas: ' + r'R$ ' + totalVendasLiquido.toStringAsFixed(2));
-    sb.writeln('   Custo Produção: ' + r'R$ ' + custoTotalProducao.toStringAsFixed(2));
-    sb.writeln('   Custo Mercadorias: ' + r'R$ ' + custoTotalMercadorias.toStringAsFixed(2));
-    sb.writeln('   Despesas Funcionários: ' + r'R$ ' + despesasFuncionarios.toStringAsFixed(2));
-    sb.writeln('   Despesas Fixas: ' + r'R$ ' + despesasFixas.toStringAsFixed(2));
-    sb.writeln('   💵 LUCRO LÍQUIDO: ' + r'R$ ' + lucroLiquido.toStringAsFixed(2));
+    sb.writeln('   Vendas Brutas: ' r'R$ ' + totalVendasBruto.toStringAsFixed(2));
+    sb.writeln('   Descontos: ' r'R$ ' + totalDescontos.toStringAsFixed(2));
+    sb.writeln('   Vendas Líquidas: ' r'R$ ' + totalVendasLiquido.toStringAsFixed(2));
+    sb.writeln('   Custo Produção: ' r'R$ ' + custoTotalProducao.toStringAsFixed(2));
+    sb.writeln('   Custo Mercadorias: ' r'R$ ' + custoTotalMercadorias.toStringAsFixed(2));
+    sb.writeln('   Despesas Funcionários: ' r'R$ ' + despesasFuncionarios.toStringAsFixed(2));
+    sb.writeln('   Despesas Fixas: ' r'R$ ' + despesasFixas.toStringAsFixed(2));
+    sb.writeln('   💵 LUCRO LÍQUIDO: ' r'R$ ' + lucroLiquido.toStringAsFixed(2));
     sb.writeln('');
     sb.writeln('📈 OPERACIONAL');
     sb.writeln('   Itens Vendidos: $totalItensVendidos');
     sb.writeln('   Itens Produzidos: $totalItensProduzidos');
     sb.writeln('   Clientes Atendidos: $totalClientesAtendidos');
-    sb.writeln('   Ticket Médio: ' + r'R$ ' + ticketMedio.toStringAsFixed(2));
+    sb.writeln('   Ticket Médio: ' r'R$ ' + ticketMedio.toStringAsFixed(2));
     sb.writeln('   Desperdício: ${percentualDesperdicio.toStringAsFixed(1)}%');
     sb.writeln('');
     sb.writeln('👥 FUNCIONÁRIOS');
@@ -269,7 +269,7 @@ class ResultadoDiario {
     sb.writeln('   Eficiência: ${eficienciaFuncionarios.toStringAsFixed(1)} itens/funcionário');
     sb.writeln('');
     sb.writeln('🎯 METAS');
-    sb.writeln('   Vendas: ${metaVendasAtingida ? "✅" : "❌"} ' + r'R$ ' + totalVendasLiquido.toStringAsFixed(2) + ' / ' + r'R$ ' + metaVendasDiaria.toStringAsFixed(2));
+    sb.writeln('   Vendas: ${metaVendasAtingida ? "✅" : "❌"} ' r'R$ ' + totalVendasLiquido.toStringAsFixed(2) + ' / ' + r'R$ ' + metaVendasDiaria.toStringAsFixed(2));
     sb.writeln('   Desperdício: ${metaDesperdicioAtingida ? "✅" : "❌"} ${percentualDesperdicio.toStringAsFixed(1)}% / $metaDesperdicioMaximo%');
     sb.writeln('');
     sb.writeln('🔔 ALERTAS');

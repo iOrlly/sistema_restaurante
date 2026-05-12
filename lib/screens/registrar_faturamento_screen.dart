@@ -197,9 +197,9 @@ class _RegistrarFaturamentoScreenState extends State<RegistrarFaturamentoScreen>
                             ),
                           ),
                           titlesData: FlTitlesData(
-                            bottomTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                            topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                            rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                            bottomTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                            topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                            rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
                             leftTitles: AxisTitles(
                               sideTitles: SideTitles(
                                 showTitles: true,
@@ -211,7 +211,7 @@ class _RegistrarFaturamentoScreenState extends State<RegistrarFaturamentoScreen>
                               ),
                             ),
                           ),
-                          gridData: FlGridData(show: true, drawVerticalLine: false, getDrawingHorizontalLine: (_) => FlLine(color: Colors.white10, strokeWidth: 1)),
+                          gridData: FlGridData(show: true, drawVerticalLine: false, getDrawingHorizontalLine: (_) => const FlLine(color: Colors.white10, strokeWidth: 1)),
                           borderData: FlBorderData(show: false),
                           barGroups: _historicoDiaSemana.asMap().entries.map((entry) {
                             return BarChartGroupData(

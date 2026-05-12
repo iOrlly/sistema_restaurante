@@ -16,6 +16,7 @@ import 'screens/funcionarios_screen.dart';
 import 'screens/produtos_screen.dart';
 import 'screens/relatorios_screen.dart';
 import 'screens/estoque_screen.dart';
+import 'screens/boletos_screen.dart';
 import 'screens/home_screen.dart';
 import 'database/dummy_data.dart'; // Importação dos dados fictícios
 
@@ -62,10 +63,10 @@ class MyApp extends StatelessWidget {
         primaryColor: const Color(0xFFD32F2F), // Vermelho Brasa
         scaffoldBackgroundColor: const Color(0xFF121212), // Preto Carvão
         cardColor: const Color(0xFF1E1E1E), // Cinza Escuro
-        colorScheme: ColorScheme.dark(
-          primary: const Color(0xFFD32F2F),
-          secondary: const Color(0xFFFFB300), // Amarelo Chama
-          surface: const Color(0xFF1E1E1E),
+        colorScheme: const ColorScheme.dark(
+          primary: Color(0xFFD32F2F),
+          secondary: Color(0xFFFFB300), // Amarelo Chama
+          surface: Color(0xFF1E1E1E),
           error: Colors.redAccent,
         ),
         appBarTheme: const AppBarTheme(
@@ -106,11 +107,11 @@ class MyApp extends StatelessWidget {
           selectedItemColor: Color(0xFFFFB300),
           unselectedItemColor: Colors.grey,
         ),
-        chipTheme: ChipThemeData(
-          backgroundColor: const Color(0xFF2C2C2C),
-          labelStyle: const TextStyle(color: Colors.white),
-          secondaryLabelStyle: const TextStyle(color: Colors.black),
-          secondarySelectedColor: const Color(0xFFFFB300),
+        chipTheme: const ChipThemeData(
+          backgroundColor: Color(0xFF2C2C2C),
+          labelStyle: TextStyle(color: Colors.white),
+          secondaryLabelStyle: TextStyle(color: Colors.black),
+          secondarySelectedColor: Color(0xFFFFB300),
         ),
       ),
       home: const MainNavigationWrapper(),
@@ -124,6 +125,7 @@ class MyApp extends StatelessWidget {
         '/produtos': (context) => const ProdutosScreen(),
         '/relatorios': (context) => const RelatoriosScreen(),
         '/estoque': (context) => const EstoqueScreen(),
+        '/boletos': (context) => const BoletosScreen(),
       },
     );
   }

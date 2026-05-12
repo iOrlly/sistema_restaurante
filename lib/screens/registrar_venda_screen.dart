@@ -284,7 +284,7 @@ class _RegistrarVendaScreenState extends State<RegistrarVendaScreen> {
                       items: _produtos.map((produto) {
                         return DropdownMenuItem(
                           value: produto,
-                          child: Text('${produto.nome} - ' + r'R$ ' + '${produto.precoUnitario.toStringAsFixed(2)}'),
+                          child: Text('${produto.nome} - ' r'R$ ' + produto.precoUnitario.toStringAsFixed(2)),
                         );
                       }).toList(),
                       onChanged: (value) => setState(() => _produtoSelecionado = value),
@@ -320,7 +320,7 @@ class _RegistrarVendaScreenState extends State<RegistrarVendaScreen> {
                       ),
                       dropdownColor: const Color(0xFF1E1E1E),
                       style: const TextStyle(color: Colors.white),
-                      value: _funcionarioSelecionado,
+                      initialValue: _funcionarioSelecionado,
                       items: _funcionarios.map((f) {
                         return DropdownMenuItem(value: f, child: Text(f.nome));
                       }).toList(),
@@ -340,7 +340,7 @@ class _RegistrarVendaScreenState extends State<RegistrarVendaScreen> {
                       ),
                       dropdownColor: const Color(0xFF1E1E1E),
                       style: const TextStyle(color: Colors.white),
-                      value: _formaPagamento,
+                      initialValue: _formaPagamento,
                       items: FormaPagamento.values.map((f) {
                         return DropdownMenuItem(value: f, child: Text(f.name.toUpperCase()));
                       }).toList(),
