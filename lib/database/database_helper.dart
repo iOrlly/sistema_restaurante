@@ -685,46 +685,56 @@ class DatabaseHelper {
   // NOVO MÉTODO: BUSCA DETALHADA PARA RELATÓRIO DE PERÍODO
   Future<Map<String, dynamic>> getDadosRelatorioPeriodo(DateTime inicio, DateTime fim) async {
     final db = await database;
-    final startStr = DateFormat('yyyy-MM-dd').format(inicio);
-    final endStr = DateFormat('yyyy-MM-dd').format(fim);
+    double totalVendas = 0;
+    double totalBoletos = 0;
+    double totalDiarias = 0;
+    
+    List<Map<String, dynamic>> listaBoletos = [];
+    List<Map<String, dynamic>> listaDiarias = [];
 
-    // 1. Detalhes de Vendas
-    final resVendas = await db.rawQuery('''
-      SELECT data, produto_nome, quantidade, valor_total, forma_pagamento 
-      FROM vendas_dia 
-      WHERE data BETWEEN ? AND ?
-      ORDER BY data ASC
-    ''', [startStr, endStr]);
+    // Iterar dia a dia no período para garantir a soma correta (priorizando faturamento manual vs granular)
+    for (DateTime d = inicio; !d.isAfter(fim); d = d.add(const Duration(days: 1))) {
+      final dataStr = DateFormat('yyyy-MM-dd').format(d);
+      
+      // 1. Vendas do dia (mesma lógica do Dashboard para consistência)
+      final resVendas = await db.rawQuery("SELECT SUM(valor_total) as total FROM vendas_dia WHERE data = ?", [dataStr]);
+      double vGranular = (resVendas.first['total'] as num?)?.toDouble() ?? 0.0;
+      
+      final fManual = await getFaturamentoPorData(dataStr);
+      double vManual = (fManual?['valor'] as num?)?.toDouble() ?? 0.0;
+      
+      // Prioridade: Se houver faturamento manual, usa ele. Se não, usa o granular.
+      totalVendas += (vManual > 0) ? vManual : vGranular;
 
-    // 2. Detalhes de Boletos Pagos
-    final resBoletos = await db.rawQuery('''
-      SELECT data_vencimento, data_pagamento, descricao, valor, categoria 
-      FROM boletos 
-      WHERE status = 1 AND data_pagamento BETWEEN ? AND ?
-      ORDER BY data_pagamento ASC
-    ''', [
-      '${startStr}T00:00:00', 
-      '${endStr}T23:59:59'
-    ]);
+      // 2. Boletos pagos NESTE dia específico (filtrando pela data_pagamento)
+      final resB = await db.rawQuery('''
+        SELECT descricao, valor, categoria, data_pagamento 
+        FROM boletos 
+        WHERE status = 1 AND data_pagamento LIKE ?
+      ''', ['$dataStr%']);
+      
+      for (var b in resB) {
+        totalBoletos += (b['valor'] as num).toDouble();
+        listaBoletos.add(b);
+      }
 
-    // 3. Detalhes de Diárias (Presenças)
-    final resDiarias = await db.rawQuery('''
-      SELECT p.data, f.nome, f.valor_diaria as valor 
-      FROM presencas p 
-      JOIN funcionarios f ON p.funcionario_id = f.id 
-      WHERE p.data BETWEEN ? AND ? AND p.status = 'presente' AND f.valor_diaria > 0
-      ORDER BY p.data ASC
-    ''', [startStr, endStr]);
-
-    // 4. Totais Agregados
-    double totalVendas = resVendas.fold(0.0, (sum, item) => sum + (item['valor_total'] as num).toDouble());
-    double totalBoletos = resBoletos.fold(0.0, (sum, item) => sum + (item['valor'] as num).toDouble());
-    double totalDiarias = resDiarias.fold(0.0, (sum, item) => sum + (item['valor'] as num).toDouble());
+      // 3. Diárias do dia
+      final resD = await db.rawQuery('''
+        SELECT f.nome, f.valor_diaria as valor, p.data
+        FROM presencas p 
+        JOIN funcionarios f ON p.funcionario_id = f.id 
+        WHERE p.data = ? AND p.status = 'presente' AND f.valor_diaria > 0
+      ''', [dataStr]);
+      
+      for (var di in resD) {
+        totalDiarias += (di['valor'] as num).toDouble();
+        listaDiarias.add(di);
+      }
+    }
 
     return {
-      'lista_vendas': resVendas,
-      'lista_boletos': resBoletos,
-      'lista_diarias': resDiarias,
+      'lista_boletos': listaBoletos,
+      'lista_diarias': listaDiarias,
       'total_vendas': totalVendas,
       'total_boletos': totalBoletos,
       'total_diarias': totalDiarias,

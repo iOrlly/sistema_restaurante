@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import '../database/database_helper.dart';
 import '../models/boleto.dart';
@@ -315,14 +314,17 @@ class _BoletosScreenState extends State<BoletosScreen> {
                 value: selecionado,
                 onChanged: (v) {
                   setState(() {
-                    if (v == true) _selecionados.add(b.id!);
-                    else _selecionados.remove(b.id!);
+                    if (v == true) {
+                      _selecionados.add(b.id!);
+                    } else {
+                      _selecionados.remove(b.id!);
+                    }
                   });
                 },
               ),
         title: Text(b.descricao, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
         subtitle: Text(
-          '${b.categoria} • ${isHistorico ? "Pago em: " + DateFormat('dd/MM').format(b.dataPagamento!) : "Vence: " + DateFormat('dd/MM').format(b.dataVencimento)}',
+          '${b.categoria} • ${isHistorico ? "Pago em: ${DateFormat('dd/MM').format(b.dataPagamento!)}" : "Vence: ${DateFormat('dd/MM').format(b.dataVencimento)}"}',
           style: const TextStyle(color: Colors.grey, fontSize: 12),
         ),
         trailing: Row(
@@ -461,7 +463,7 @@ class _BoletoFormDialogState extends State<_BoletoFormDialog> {
               ),
               const SizedBox(height: 16),
               DropdownButtonFormField<String>(
-                value: _categoria,
+                initialValue: _categoria,
                 dropdownColor: const Color(0xFF1E1E1E),
                 style: const TextStyle(color: Colors.white),
                 decoration: const InputDecoration(labelText: 'Categoria', labelStyle: TextStyle(color: Colors.grey)),
@@ -497,8 +499,11 @@ class _BoletoFormDialogState extends State<_BoletoFormDialog> {
                 status: widget.boleto?.status ?? 0,
                 dataPagamento: widget.boleto?.dataPagamento,
               );
-              if (widget.boleto == null) await DatabaseHelper.instance.insertBoleto(b);
-              else await DatabaseHelper.instance.updateBoleto(b);
+              if (widget.boleto == null) {
+                await DatabaseHelper.instance.insertBoleto(b);
+              } else {
+                await DatabaseHelper.instance.updateBoleto(b);
+              }
               widget.onSave();
               Navigator.pop(context);
             }
