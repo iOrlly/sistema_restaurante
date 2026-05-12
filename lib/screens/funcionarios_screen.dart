@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../database/database_helper.dart';
 import '../models/funcionario.dart';
 import '../models/notificacao_folga.dart';
+import '../services/currency_formatter.dart';
 
 class FuncionariosScreen extends StatefulWidget {
   const FuncionariosScreen({super.key});
@@ -400,8 +402,8 @@ class _FuncionarioDialogState extends State<_FuncionarioDialog> {
     if (widget.funcionario != null) {
       _nome.text = widget.funcionario!.nome;
       _tel.text = widget.funcionario!.telefone;
-      _salario.text = widget.funcionario!.salario.toString();
-      _diaria.text = widget.funcionario!.valorDiaria.toString();
+      _salario.text = NumberFormat.currency(locale: 'pt_BR', symbol: '').format(widget.funcionario!.salario).trim();
+      _diaria.text = NumberFormat.currency(locale: 'pt_BR', symbol: '').format(widget.funcionario!.valorDiaria).trim();
       _obs.text = widget.funcionario!.observacao ?? '';
       _setor = widget.funcionario!.setor;
       _setor2 = widget.funcionario!.setor2;
@@ -429,8 +431,8 @@ class _FuncionarioDialogState extends State<_FuncionarioDialog> {
               if (_cargo2 != null)
                 _buildDropdown<SetorFuncionario?>('Setor Secundário', _setor2, [null, ...SetorFuncionario.values], (v) => setState(() => _setor2 = v), (s) => s?.displayName ?? 'Nenhum'),
               _buildInput(_tel, 'Telefone/WhatsApp', type: TextInputType.phone),
-              _buildInput(_salario, 'Salário Fixo', type: TextInputType.number),
-              _buildInput(_diaria, 'Valor Diária (Terceirizados)', type: TextInputType.number),
+              _buildInput(_salario, 'Salário Fixo', type: TextInputType.number, isMoeda: true),
+              _buildInput(_diaria, 'Valor Diária (Terceirizados)', type: TextInputType.number, isMoeda: true),
               _buildInput(_obs, 'Observações', maxLines: 2),
             ],
           ),
@@ -449,8 +451,8 @@ class _FuncionarioDialogState extends State<_FuncionarioDialog> {
                 setor2: _setor2,
                 cargo2: _cargo2,
                 telefone: _tel.text,
-                salario: double.tryParse(_salario.text) ?? 0,
-                valorDiaria: double.tryParse(_diaria.text) ?? 0,
+                salario: CurrencyInputFormatter.parse(_salario.text),
+                valorDiaria: CurrencyInputFormatter.parse(_diaria.text),
                 dataContratacao: widget.funcionario?.dataContratacao ?? DateTime.now(),
                 diasTrabalhados: widget.funcionario?.diasTrabalhados ?? 0,
                 observacao: _obs.text,
@@ -463,7 +465,7 @@ class _FuncionarioDialogState extends State<_FuncionarioDialog> {
     );
   }
 
-  Widget _buildInput(TextEditingController controller, String label, {TextInputType type = TextInputType.text, int maxLines = 1}) {
+  Widget _buildInput(TextEditingController controller, String label, {TextInputType type = TextInputType.text, int maxLines = 1, bool isMoeda = false}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: TextFormField(
@@ -477,6 +479,10 @@ class _FuncionarioDialogState extends State<_FuncionarioDialog> {
           focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Color(0xFFFFB300))),
         ),
         keyboardType: type,
+        inputFormatters: isMoeda ? [
+          FilteringTextInputFormatter.digitsOnly,
+          CurrencyInputFormatter(),
+        ] : null,
         validator: (v) => (v == null || v.isEmpty && label == 'Nome') ? 'Obrigatório' : null,
       ),
     );

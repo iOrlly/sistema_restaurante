@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import '../database/database_helper.dart';
 import '../models/estoque_item.dart';
+import '../services/currency_formatter.dart';
 
 class EstoqueScreen extends StatefulWidget {
   const EstoqueScreen({super.key});
@@ -199,7 +202,7 @@ class _EstoqueFormDialogState extends State<_EstoqueFormDialog> {
       _cat.text = widget.item!.categoria;
       _qtd.text = widget.item!.quantidadeAtual.toString();
       _min.text = widget.item!.quantidadeMinima.toString();
-      _custo.text = widget.item!.custoUnitario.toString();
+      _custo.text = NumberFormat.currency(locale: 'pt_BR', symbol: '').format(widget.item!.custoUnitario).trim();
       _fator.text = widget.item!.fatorConversao.toString();
       _unidade = widget.item!.unidadeMedida;
     }
@@ -235,7 +238,7 @@ class _EstoqueFormDialogState extends State<_EstoqueFormDialog> {
                 ],
               ),
               _buildInput(_min, 'Qtd Mínima (Alerta)', type: TextInputType.number),
-              _buildInput(_custo, 'Custo Unitário', type: TextInputType.number),
+              _buildInput(_custo, 'Custo Unitário', type: TextInputType.number, isMoeda: true),
               _buildInput(_fator, 'Fator de Conversão', type: TextInputType.number),
             ],
           ),
@@ -252,7 +255,7 @@ class _EstoqueFormDialogState extends State<_EstoqueFormDialog> {
                 categoria: _cat.text,
                 quantidadeAtual: double.parse(_qtd.text.replaceAll(',', '.')),
                 quantidadeMinima: double.parse(_min.text.replaceAll(',', '.')),
-                custoUnitario: double.parse(_custo.text.replaceAll(',', '.')),
+                custoUnitario: CurrencyInputFormatter.parse(_custo.text),
                 unidadeMedida: _unidade,
                 fatorConversao: double.tryParse(_fator.text.replaceAll(',', '.')) ?? 1.0,
               ));
@@ -264,12 +267,16 @@ class _EstoqueFormDialogState extends State<_EstoqueFormDialog> {
     );
   }
 
-  Widget _buildInput(TextEditingController controller, String label, {TextInputType type = TextInputType.text}) {
+  Widget _buildInput(TextEditingController controller, String label, {TextInputType type = TextInputType.text, bool isMoeda = false}) {
     return TextFormField(
       controller: controller,
       style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(labelText: label, labelStyle: const TextStyle(color: Colors.grey)),
       keyboardType: type,
+      inputFormatters: isMoeda ? [
+        FilteringTextInputFormatter.digitsOnly,
+        CurrencyInputFormatter(),
+      ] : null,
       validator: (v) => v!.isEmpty ? 'Obrigatório' : null,
     );
   }

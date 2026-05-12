@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import '../database/database_helper.dart';
 import '../models/produto.dart';
 import '../models/producao_dia.dart';
 import '../models/funcionario.dart';
+import '../services/currency_formatter.dart';
 
 class RegistrarProducaoScreen extends StatefulWidget {
   const RegistrarProducaoScreen({super.key});
@@ -100,7 +102,7 @@ class _RegistrarProducaoScreenState extends State<RegistrarProducaoScreen> {
       horarioInicioProducao: inicio,
       horarioFimProducao: fim,
       funcionarioResponsavelId: _funcionarioResponsavel!.id!,
-      custoEstimadoProducao: double.parse(_custoEstimadoController.text),
+      custoEstimadoProducao: CurrencyInputFormatter.parse(_custoEstimadoController.text),
       houveDesperdicio: quantidadeRestante > 0,
     );
     
@@ -344,7 +346,7 @@ class _RegistrarProducaoScreenState extends State<RegistrarProducaoScreen> {
   Widget _buildFireInput(TextEditingController controller, String label, IconData icon, [String? tip]) {
     return TextFormField(
       controller: controller,
-      style: const TextStyle(color: Colors.white),
+      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
       decoration: InputDecoration(
         labelText: label,
         labelStyle: const TextStyle(color: Colors.grey),
@@ -356,6 +358,10 @@ class _RegistrarProducaoScreenState extends State<RegistrarProducaoScreen> {
         ),
       ),
       keyboardType: TextInputType.number,
+      inputFormatters: label.contains('R\$') ? [
+        FilteringTextInputFormatter.digitsOnly,
+        CurrencyInputFormatter(),
+      ] : null,
       onChanged: (_) => _calcularSugestao(),
     );
   }

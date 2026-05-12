@@ -17,10 +17,11 @@ O **Controle Restaurante** é uma solução completa em Flutter desenvolvida par
 - **Alertas de Reposição:** Notificações automáticas quando um item atinge o nível crítico.
 - **Rastreio de Avarias:** Registro específico para perdas e desperdícios no estoque.
 
-### 💰 Operações Financeiras
-- **Faturamento Bruto:** Registro rápido das entradas diárias.
-- **Fechamento de Caixa:** Cálculo automático do **Lucro Líquido**, subtraindo despesas, diárias de terceirizados e custos operacionais.
-- **Análise de Vendas:** Módulo avançado com insights de mercado, aplicação de descontos e escolha de forma de pagamento (PIX, Cartão, Dinheiro).
+### 💰 Ecossistema Financeiro Integrado (Novo!)
+- **Conexão entre Telas:** O sistema sincroniza automaticamente dados de múltiplos módulos.
+- **Fechamento Automático:** Puxa o total de vendas granulares, boletos pagos no dia e diárias de funcionários presentes.
+- **Análise por Período:** Escolha qualquer intervalo de datas (dia, semana, mês) para ver o Lucro Líquido Real.
+- **Exportação Detalhada:** Relatórios em Excel com abas separadas para Resumo Financeiro e Detalhamento de Saídas.
 
 ### 🍳 Produção & Combate ao Desperdício
 - **Planejamento de Produção:** Registro do que foi produzido vs. o que sobrou.

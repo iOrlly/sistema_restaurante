@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:excel/excel.dart';
 import 'package:intl/intl.dart';
 import '../models/funcionario.dart';
@@ -107,5 +108,69 @@ class ExcelService {
     }
 
     await SaveHelper.saveEAbrir(excel, 'relatorio_boletos_${DateFormat('yyyy-MM-dd').format(DateTime.now())}.xlsx');
+  }
+
+  static Future<void> exportarBoletoIndividual(dynamic b) async {
+    var excel = Excel.createExcel();
+    Sheet sheetObject = excel['Comprovante Boleto'];
+    excel.delete('Sheet1');
+
+    sheetObject.cell(CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: 0)).value = TextCellValue('COMPROVANTE DE LANÇAMENTO');
+    sheetObject.cell(CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: 2)).value = TextCellValue('Descrição:');
+    sheetObject.cell(CellIndex.indexByColumnRow(columnIndex: 1, rowIndex: 2)).value = TextCellValue(b.descricao);
+    sheetObject.cell(CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: 3)).value = TextCellValue('Valor:');
+    sheetObject.cell(CellIndex.indexByColumnRow(columnIndex: 1, rowIndex: 3)).value = DoubleCellValue(b.valor);
+    sheetObject.cell(CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: 4)).value = TextCellValue('Vencimento:');
+    sheetObject.cell(CellIndex.indexByColumnRow(columnIndex: 1, rowIndex: 4)).value = TextCellValue(DateFormat('dd/MM/yyyy').format(b.dataVencimento));
+    sheetObject.cell(CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: 5)).value = TextCellValue('Status:');
+    sheetObject.cell(CellIndex.indexByColumnRow(columnIndex: 1, rowIndex: 5)).value = TextCellValue(b.status == 1 ? 'PAGO' : 'PENDENTE');
+
+    await SaveHelper.saveEAbrir(excel, 'boleto_${b.descricao.replaceAll(' ', '_')}.xlsx');
+  }
+
+  static Future<void> exportarRelatorioGeral(Map<String, dynamic> dados, DateTimeRange periodo) async {
+    var excel = Excel.createExcel();
+    excel.delete('Sheet1');
+
+    // Aba de Resumo
+    Sheet res = excel['RESUMO FINANCEIRO'];
+    res.cell(CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: 0)).value = TextCellValue('Relatório de Fechamento - Beira Rio');
+    res.cell(CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: 1)).value = TextCellValue('Período: ${DateFormat('dd/MM/yy').format(periodo.start)} até ${DateFormat('dd/MM/yy').format(periodo.end)}');
+    
+    res.cell(CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: 3)).value = TextCellValue('(+) TOTAL VENDAS:');
+    res.cell(CellIndex.indexByColumnRow(columnIndex: 1, rowIndex: 3)).value = DoubleCellValue(dados['total_vendas']);
+    
+    res.cell(CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: 4)).value = TextCellValue('(-) TOTAL BOLETOS:');
+    res.cell(CellIndex.indexByColumnRow(columnIndex: 1, rowIndex: 4)).value = DoubleCellValue(dados['total_boletos']);
+    
+    res.cell(CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: 5)).value = TextCellValue('(-) TOTAL DIÁRIAS:');
+    res.cell(CellIndex.indexByColumnRow(columnIndex: 1, rowIndex: 5)).value = DoubleCellValue(dados['total_diarias']);
+    
+    res.cell(CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: 7)).value = TextCellValue('(=) LUCRO LÍQUIDO:');
+    res.cell(CellIndex.indexByColumnRow(columnIndex: 1, rowIndex: 7)).value = DoubleCellValue(dados['lucro_liquido']);
+
+    // Aba de Detalhes de Saída (Boletos + Diárias)
+    Sheet out = excel['DETALHES DE SAÍDA'];
+    out.appendRow([TextCellValue('TIPO'), TextCellValue('DATA'), TextCellValue('DESCRIÇÃO'), TextCellValue('VALOR')]);
+    
+    for (var b in dados['lista_boletos']) {
+      out.appendRow([
+        TextCellValue('BOLETO'),
+        TextCellValue(DateFormat('dd/MM/yy').format(DateTime.parse(b['data_pagamento']))),
+        TextCellValue(b['descricao']),
+        DoubleCellValue(b['valor'])
+      ]);
+    }
+    
+    for (var d in dados['lista_diarias']) {
+      out.appendRow([
+        TextCellValue('DIÁRIA'),
+        TextCellValue(DateFormat('dd/MM/yy').format(DateTime.parse(d['data']))),
+        TextCellValue(d['nome']),
+        DoubleCellValue(d['valor'])
+      ]);
+    }
+
+    await SaveHelper.saveEAbrir(excel, 'Relatorio_Geral_${DateFormat('ddMMyy').format(periodo.start)}_a_${DateFormat('ddMMyy').format(periodo.end)}.xlsx');
   }
 }

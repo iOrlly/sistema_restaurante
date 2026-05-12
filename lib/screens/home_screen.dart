@@ -210,10 +210,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisSpacing: 16,
                           crossAxisSpacing: 16,
                           children: [
-                            _buildSummaryCard('Faturamento', r'R$ ' + faturamento.toStringAsFixed(2), Icons.attach_money, const Color(0xFFFFB300)),
-                            _buildSummaryCard('Desperdício', '${percentualDesperdicio.toStringAsFixed(1)}%', Icons.warning, const Color(0xFFFFB300)),
-                            _buildSummaryCard('Vendidos', '$itensVendidos / $itensProduzidos', Icons.restaurant, const Color(0xFFD32F2F)),
-                            _buildSummaryCard('Produtividade', '${eficienciaPorFuncionario.toStringAsFixed(1)}/func', Icons.trending_up, const Color(0xFFFFB300)),
+                            _buildSummaryCard('Faturamento', r'R$ ' + faturamento.toStringAsFixed(2), Icons.attach_money, const Color(0xFFFFB300), 'Dinheiro total que entrou hoje'),
+                            _buildSummaryCard('Desperdício', '${percentualDesperdicio.toStringAsFixed(1)}%', Icons.warning, const Color(0xFFFFB300), 'Porcentagem de sobra/perda'),
+                            _buildSummaryCard('Vendidos', '$itensVendidos / $itensProduzidos', Icons.restaurant, const Color(0xFFD32F2F), 'Itens vendidos versus produzidos'),
+                            _buildSummaryCard('Produtividade', '${eficienciaPorFuncionario.toStringAsFixed(1)}/func', Icons.trending_up, const Color(0xFFFFB300), 'Média de itens por funcionário'),
                           ],
                         ),
                         
@@ -222,32 +222,35 @@ class _HomeScreenState extends State<HomeScreen> {
                         // Card de Acesso Rápido ao Almoxerifado
                         GestureDetector(
                           onTap: () => Navigator.pushNamed(context, '/estoque'),
-                          child: Card(
-                            color: const Color(0xFF1E1E1E),
-                            child: Padding(
-                              padding: const EdgeInsets.all(16),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    padding: const EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                      color: const Color(0xFFD32F2F).withOpacity(0.1),
-                                      borderRadius: BorderRadius.circular(10),
+                          child: Tooltip(
+                            message: 'Abrir controle de estoque',
+                            child: Card(
+                              color: const Color(0xFF1E1E1E),
+                              child: Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xFFD32F2F).withOpacity(0.1),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: const Icon(Icons.warehouse, color: Color(0xFFD32F2F)),
                                     ),
-                                    child: const Icon(Icons.warehouse, color: Color(0xFFD32F2F)),
-                                  ),
-                                  const SizedBox(width: 16),
-                                  const Expanded(
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text('ALMOXERIFADO', style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1, fontSize: 12, color: Colors.grey)),
-                                        Text('Gerenciar Estoque e Insumos', style: TextStyle(color: Colors.white, fontSize: 16)),
-                                      ],
+                                    const SizedBox(width: 16),
+                                    const Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text('ALMOXERIFADO', style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1, fontSize: 12, color: Colors.grey)),
+                                          Text('Gerenciar Estoque e Insumos', style: TextStyle(color: Colors.white, fontSize: 16)),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  const Icon(Icons.chevron_right, color: Colors.grey),
-                                ],
+                                    const Icon(Icons.chevron_right, color: Colors.grey),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -310,9 +313,9 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildSummaryCard(String title, String value, IconData icon, Color color) {
+  Widget _buildSummaryCard(String title, String value, IconData icon, Color color, [String? tooltip]) {
     return Tooltip(
-      message: 'Status de $title',
+      message: tooltip ?? 'Status de $title',
       child: Card(
         elevation: 4,
         child: Padding(

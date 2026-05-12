@@ -32,7 +32,7 @@ class DatabaseHelper {
     try {
       final database = await openDatabase(
         path,
-        version: 11, // Versão 11 para Módulo de Boletos
+        version: 12, // Versão 12 para Data de Pagamento em Boletos
         onCreate: _createTables,
         onUpgrade: _upgradeTables,
       );
@@ -210,7 +210,8 @@ class DatabaseHelper {
         valor REAL NOT NULL,
         data_vencimento TEXT NOT NULL,
         status INTEGER NOT NULL DEFAULT 0,
-        categoria TEXT NOT NULL
+        categoria TEXT NOT NULL,
+        data_pagamento TEXT
       )
     ''');
   }
@@ -271,6 +272,9 @@ class DatabaseHelper {
           categoria TEXT NOT NULL
         )
       ''');
+    }
+    if (oldVersion < 12) {
+      await db.execute('ALTER TABLE boletos ADD COLUMN data_pagamento TEXT');
     }
   }
 
@@ -492,6 +496,66 @@ class DatabaseHelper {
     return await db.delete('boletos', where: 'id = ?', whereArgs: [id]);
   }
 
+  Future<void> marcarBoletosComoPagos(List<int> ids) async {
+    final db = await database;
+    final dataPagamento = DateTime.now().toIso8601String();
+    await db.transaction((txn) async {
+      for (int id in ids) {
+        await txn.update(
+          'boletos', 
+          {'status': 1, 'data_pagamento': dataPagamento}, 
+          where: 'id = ?', 
+          whereArgs: [id]
+        );
+      }
+    });
+  }
+
+  Future<List<Boleto>> getBoletosPagosFiltrados({
+    String? busca,
+    DateTime? inicio,
+    DateTime? fim,
+    double? valorMin,
+    double? valorMax,
+  }) async {
+    final db = await database;
+    List<String> whereClauses = ["status = 1"];
+    List<dynamic> whereArgs = [];
+
+    if (busca != null && busca.isNotEmpty) {
+      whereClauses.add("descricao LIKE ?");
+      whereArgs.add("%$busca%");
+    }
+
+    if (inicio != null) {
+      whereClauses.add("data_pagamento >= ?");
+      // Define o início do dia selecionado
+      final start = DateTime(inicio.year, inicio.month, inicio.day, 0, 0, 0);
+      whereArgs.add(start.toIso8601String());
+    }
+
+    if (fim != null) {
+      whereClauses.add("data_pagamento <= ?");
+      // Define o final do dia selecionado (23:59:59) para abranger tudo do dia
+      final end = DateTime(fim.year, fim.month, fim.day, 23, 59, 59);
+      whereArgs.add(end.toIso8601String());
+    }
+
+    if (valorMin != null) {
+      whereClauses.add("valor >= ?");
+      whereArgs.add(valorMin);
+    }
+
+    if (valorMax != null) {
+      whereClauses.add("valor <= ?");
+      whereArgs.add(valorMax);
+    }
+
+    String whereString = whereClauses.join(" AND ");
+    final res = await db.query('boletos', where: whereString, whereArgs: whereArgs, orderBy: 'data_pagamento DESC');
+    return res.map((j) => Boleto.fromMap(j)).toList();
+  }
+
   Future<double> getTotalPendenteHoje() async {
     final db = await database;
     final now = DateTime.now();
@@ -567,7 +631,7 @@ class DatabaseHelper {
       final r = await getRelatorioDiario(d.toIso8601String().split('T')[0]);
       ResultadoDiario rd = ResultadoDiario(data: d);
       rd.totalVendasBruto = r['faturamento'];
-      rd.totalVendasLiquido = r['faturamento'];
+      rd.totalVendasLiquido = r['faturamento'] - (r['total_boletos_pagos'] ?? 0.0);
       rd.totalItensVendidos = (r['itens_vendidos']).toInt();
       rd.totalItensProduzidos = (r['itens_produzidos']).toInt();
       rd.percentualDesperdicio = r['percentual_desperdicio'];
@@ -577,5 +641,94 @@ class DatabaseHelper {
       res.add(rd);
     }
     return res;
+  }
+
+  // MÉTODO DE INTEGRAÇÃO TOTAL PARA O FECHAMENTO
+  Future<Map<String, double>> getSugestaoFechamento(DateTime data) async {
+    final db = await database;
+    final dataStr = DateFormat('yyyy-MM-dd').format(data);
+
+    // 1. Soma de Vendas Granulares (se houver)
+    final resVendas = await db.rawQuery(
+      "SELECT SUM(valor_total) as total FROM vendas_dia WHERE data = ?", [dataStr]
+    );
+    double vendas = (resVendas.first['total'] as num?)?.toDouble() ?? 0.0;
+
+    // Se não houver vendas granulares, tenta pegar do faturamento manual
+    if (vendas == 0) {
+      final f = await getFaturamentoPorData(dataStr);
+      vendas = (f?['valor'] as num?)?.toDouble() ?? 0.0;
+    }
+
+    // 2. Soma de Boletos Pagos NESTE DIA
+    final resBoletos = await db.rawQuery(
+      "SELECT SUM(valor) as total FROM boletos WHERE status = 1 AND data_pagamento LIKE ?", ['$dataStr%']
+    );
+    double boletos = (resBoletos.first['total'] as num?)?.toDouble() ?? 0.0;
+
+    // 3. Soma de Diárias de Funcionários Fixos PRESENTES
+    final resFixos = await db.rawQuery('''
+      SELECT SUM(f.valor_diaria) as total 
+      FROM presencas p 
+      JOIN funcionarios f ON p.funcionario_id = f.id 
+      WHERE p.data = ? AND p.status = 'presente' AND f.valor_diaria > 0
+    ''', [dataStr]);
+    double diarias = (resFixos.first['total'] as num?)?.toDouble() ?? 0.0;
+
+    return {
+      'vendas': vendas,
+      'boletos': boletos,
+      'diarias': diarias,
+    };
+  }
+
+  // NOVO MÉTODO: BUSCA DETALHADA PARA RELATÓRIO DE PERÍODO
+  Future<Map<String, dynamic>> getDadosRelatorioPeriodo(DateTime inicio, DateTime fim) async {
+    final db = await database;
+    final startStr = DateFormat('yyyy-MM-dd').format(inicio);
+    final endStr = DateFormat('yyyy-MM-dd').format(fim);
+
+    // 1. Detalhes de Vendas
+    final resVendas = await db.rawQuery('''
+      SELECT data, produto_nome, quantidade, valor_total, forma_pagamento 
+      FROM vendas_dia 
+      WHERE data BETWEEN ? AND ?
+      ORDER BY data ASC
+    ''', [startStr, endStr]);
+
+    // 2. Detalhes de Boletos Pagos
+    final resBoletos = await db.rawQuery('''
+      SELECT data_vencimento, data_pagamento, descricao, valor, categoria 
+      FROM boletos 
+      WHERE status = 1 AND data_pagamento BETWEEN ? AND ?
+      ORDER BY data_pagamento ASC
+    ''', [
+      '${startStr}T00:00:00', 
+      '${endStr}T23:59:59'
+    ]);
+
+    // 3. Detalhes de Diárias (Presenças)
+    final resDiarias = await db.rawQuery('''
+      SELECT p.data, f.nome, f.valor_diaria as valor 
+      FROM presencas p 
+      JOIN funcionarios f ON p.funcionario_id = f.id 
+      WHERE p.data BETWEEN ? AND ? AND p.status = 'presente' AND f.valor_diaria > 0
+      ORDER BY p.data ASC
+    ''', [startStr, endStr]);
+
+    // 4. Totais Agregados
+    double totalVendas = resVendas.fold(0.0, (sum, item) => sum + (item['valor_total'] as num).toDouble());
+    double totalBoletos = resBoletos.fold(0.0, (sum, item) => sum + (item['valor'] as num).toDouble());
+    double totalDiarias = resDiarias.fold(0.0, (sum, item) => sum + (item['valor'] as num).toDouble());
+
+    return {
+      'lista_vendas': resVendas,
+      'lista_boletos': resBoletos,
+      'lista_diarias': resDiarias,
+      'total_vendas': totalVendas,
+      'total_boletos': totalBoletos,
+      'total_diarias': totalDiarias,
+      'lucro_liquido': totalVendas - (totalBoletos + totalDiarias),
+    };
   }
 }

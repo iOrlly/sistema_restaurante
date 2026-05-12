@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../database/database_helper.dart';
 import '../models/terceirizado.dart';
+import '../services/currency_formatter.dart';
 
 class TerceirizadosScreen extends StatefulWidget {
   const TerceirizadosScreen({super.key});
@@ -234,7 +237,7 @@ class __TerceirizadoFormDialogState extends State<_TerceirizadoFormDialog> {
     super.initState();
     if (widget.terceirizado != null) {
       _nomeController.text = widget.terceirizado!.nome;
-      _diariaController.text = widget.terceirizado!.valorDiaria.toString().replaceAll('.', ',');
+      _diariaController.text = NumberFormat.currency(locale: 'pt_BR', symbol: '').format(widget.terceirizado!.valorDiaria).trim();
       _contatoController.text = widget.terceirizado!.contato;
       _obsController.text = widget.terceirizado!.observacao ?? '';
     }
@@ -252,7 +255,7 @@ class __TerceirizadoFormDialogState extends State<_TerceirizadoFormDialog> {
             mainAxisSize: MainAxisSize.min,
             children: [
               _buildInput(_nomeController, 'Nome Completo'),
-              _buildInput(_diariaController, r'Valor da Diária (R$)', type: TextInputType.number),
+              _buildInput(_diariaController, r'Valor da Diária (R$)', type: TextInputType.number, isMoeda: true),
               _buildInput(_contatoController, 'WhatsApp (apenas números)', type: TextInputType.phone),
               _buildInput(_obsController, 'Observações', maxLines: 2),
             ],
@@ -267,7 +270,7 @@ class __TerceirizadoFormDialogState extends State<_TerceirizadoFormDialog> {
               Navigator.pop(context, Terceirizado(
                 id: widget.terceirizado?.id,
                 nome: _nomeController.text,
-                valorDiaria: double.parse(_diariaController.text.replaceAll(',', '.')),
+                valorDiaria: CurrencyInputFormatter.parse(_diariaController.text),
                 contato: _contatoController.text.replaceAll(RegExp(r'[^0-9]'), ''),
                 observacao: _obsController.text,
                 diasTrabalhados: widget.terceirizado?.diasTrabalhados ?? 0,
@@ -280,7 +283,7 @@ class __TerceirizadoFormDialogState extends State<_TerceirizadoFormDialog> {
     );
   }
 
-  Widget _buildInput(TextEditingController controller, String label, {TextInputType type = TextInputType.text, int maxLines = 1}) {
+  Widget _buildInput(TextEditingController controller, String label, {TextInputType type = TextInputType.text, int maxLines = 1, bool isMoeda = false}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: TextFormField(
@@ -294,6 +297,10 @@ class __TerceirizadoFormDialogState extends State<_TerceirizadoFormDialog> {
           focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Color(0xFFFFB300))),
         ),
         keyboardType: type,
+        inputFormatters: isMoeda ? [
+          FilteringTextInputFormatter.digitsOnly,
+          CurrencyInputFormatter(),
+        ] : null,
         validator: (v) => (v == null || v.isEmpty) ? 'Obrigatório' : null,
       ),
     );

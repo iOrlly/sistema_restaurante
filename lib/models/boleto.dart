@@ -5,6 +5,7 @@ class Boleto {
   DateTime dataVencimento;
   int status; // 0: pendente, 1: pago
   String categoria;
+  DateTime? dataPagamento;
 
   Boleto({
     this.id,
@@ -13,6 +14,7 @@ class Boleto {
     required this.dataVencimento,
     this.status = 0,
     required this.categoria,
+    this.dataPagamento,
   });
 
   Map<String, dynamic> toMap() {
@@ -23,6 +25,7 @@ class Boleto {
       'data_vencimento': dataVencimento.toIso8601String(),
       'status': status,
       'categoria': categoria,
+      'data_pagamento': dataPagamento?.toIso8601String(),
     };
   }
 
@@ -34,6 +37,7 @@ class Boleto {
       dataVencimento: DateTime.parse(map['data_vencimento']),
       status: map['status'],
       categoria: map['categoria'],
+      dataPagamento: map['data_pagamento'] != null ? DateTime.parse(map['data_pagamento']) : null,
     );
   }
 

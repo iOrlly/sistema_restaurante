@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:fl_chart/fl_chart.dart';
 import '../database/database_helper.dart';
+import '../services/currency_formatter.dart';
 
 class RegistrarFaturamentoScreen extends StatefulWidget {
   const RegistrarFaturamentoScreen({super.key});
@@ -31,7 +33,8 @@ class _RegistrarFaturamentoScreenState extends State<RegistrarFaturamentoScreen>
     final faturamento = await _dbHelper.getFaturamentoPorData(dataStr);
     
     if (faturamento != null) {
-      _faturamentoController.text = faturamento['valor'].toString();
+      double valor = faturamento['valor'];
+      _faturamentoController.text = NumberFormat.currency(locale: 'pt_BR', symbol: '').format(valor).trim();
       _observacaoController.text = faturamento['observacao'] ?? '';
     } else {
       _faturamentoController.clear();
@@ -56,7 +59,7 @@ class _RegistrarFaturamentoScreenState extends State<RegistrarFaturamentoScreen>
     String dataStr = _dataSelecionada.toIso8601String().split('T')[0];
     await _dbHelper.upsertFaturamentoDiario(
       dataStr, 
-      double.parse(_faturamentoController.text.replaceAll(',', '.')),
+      CurrencyInputFormatter.parse(_faturamentoController.text),
       observacao: _observacaoController.text
     );
     await _carregarDados();
@@ -67,7 +70,7 @@ class _RegistrarFaturamentoScreenState extends State<RegistrarFaturamentoScreen>
 
   String _getMensagemComparativa() {
     if (_faturamentoController.text.isEmpty || _mediaHistorica == 0) return 'Dados insuficientes para comparação.';
-    double valorAtual = double.tryParse(_faturamentoController.text.replaceAll(',', '.')) ?? 0;
+    double valorAtual = CurrencyInputFormatter.parse(_faturamentoController.text);
     double diff = ((valorAtual - _mediaHistorica) / _mediaHistorica) * 100;
     
     if (diff > 10) return 'Excelente! Hoje rendeu ${diff.toStringAsFixed(1)}% a mais que a média deste dia da semana. 🎉';
@@ -131,6 +134,10 @@ class _RegistrarFaturamentoScreenState extends State<RegistrarFaturamentoScreen>
                       ),
                     ),
                     keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      CurrencyInputFormatter(),
+                    ],
                   ),
                   const SizedBox(height: 12),
                   TextField(

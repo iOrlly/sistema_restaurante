@@ -158,9 +158,9 @@ class _MainNavigationWrapperState extends State<MainNavigationWrapper> {
         unselectedItemColor: Colors.grey,
         type: BottomNavigationBarType.fixed,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Início'),
-          BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Funcionários'),
-          BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: 'Relatórios'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Início', tooltip: 'Voltar para a tela inicial'),
+          BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Funcionários', tooltip: 'Gestão de equipe e presença'),
+          BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: 'Relatórios', tooltip: 'Gráficos e estatísticas do negócio'),
         ],
       ),
     );
